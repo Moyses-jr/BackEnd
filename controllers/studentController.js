@@ -3,8 +3,13 @@ const { student: StudentModel } = require("../models/student");
 const studentController = {
   loginStudent: async (req, res) => {
     try {
-      console.log(req.body);
-      const response = await StudentModel.find();
+      const data = {
+        "login.email": req.body.email,
+        "login.password": req.body.password,
+      };
+
+      console.log(data);
+      const response = await StudentModel.findOne(data);
 
       res.status(201).json(response);
     } catch (error) {
