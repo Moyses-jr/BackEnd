@@ -1,15 +1,20 @@
-const { connect, connection: db, model } = require("mongoose");
+const mysql = require("mysql2/promise");
 
-const uri = "mongodb://127.0.0.1:27017";
-
-const ConnectDB = async () => {
+async function ConnectDB() {
   try {
-    db.once("open", () => console.log("Estamos conectados no banco de dados!"));
+    const connection = await mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: process.env.ACCESS_DATABASE,
+      database: "transport",
+    });
 
-    await connect(uri, { dbName: "dbStudants" });
+    console.log("Connected to the database");
+    return connection;
   } catch (error) {
-    console.log(`Não conectado ao BD! Erro ${error}`);
+    console.error("Error connecting to the database:", error);
+    throw error;
   }
-};
+}
 
 module.exports = { ConnectDB };

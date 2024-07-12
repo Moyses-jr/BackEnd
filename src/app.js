@@ -1,11 +1,11 @@
+require("dotenv").config();
 const express = require("express");
-const port = 8080;
+const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
 const app = express();
 
 app.use(cors());
-
 app.use(express.json());
 
 //DB
@@ -16,4 +16,6 @@ const routes = require("../router/routes");
 
 app.use("/api", routes);
 
-app.listen(port, () => {});
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
+});
