@@ -1,9 +1,12 @@
 const studentRouter = require("express").Router();
 
-const { studentController } = require("../controllers/studentController");
+const {
+  createStudentController,
+  loginStudentController,
+} = require("../controllers/studentController");
 
-studentRouter.post("/loginStudent", studentController.loginStudent);
+studentRouter.post("/login", loginStudentController);
 
-studentRouter.post("/createStudent", studentController.createStudent);
+studentRouter.post("/cadastro", createStudentController);
 
 module.exports = { studentRouter };
